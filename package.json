@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@google/genai": "^1.34.0",
+    "axios": "^1.13.2",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "readline-sync": "^1.4.10"
