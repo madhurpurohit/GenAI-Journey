@@ -75,9 +75,7 @@ async function runAgent() {
       config: { tools },
     });
 
-    let i = 1;
     console.log(`AI Response ${i}: `, response.functionCalls);
-    i++;
 
     // SubStep3:- Check if the AI decided to make any function/tool calls
     if (response.functionCalls && response.functionCalls.length > 0) {
