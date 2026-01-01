@@ -50,6 +50,12 @@ junit.xml
 *.bak
 *~
 
+Extension-Guide.md
+Production-Grade.md
+Routine.md
+Security.md
+Cmd-Extension.md
+
 # OS Generated Files
 .DS_Store
 Thumbs.db

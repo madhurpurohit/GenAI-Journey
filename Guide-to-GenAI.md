@@ -9,8 +9,8 @@
 5. [How we can optimize the system instructions using prompt engineering?](#5-how-we-can-optimize-the-system-instruction-using-prompt-engineering)
 6. [What is LLM Hallucination?](#6-what-is-llm-hallucination)
 7. [What is AI Agent?](#7-what-is-ai-agent)
-8. [](#8)
-9. [](#9)
+8. [What is Vector?](#8-what-is-vector)
+9. [What is Vector DB?](#9-what-is-vector-db)
 10. [](#10)
 11. [](#11)
 12. [](#12)
@@ -405,6 +405,12 @@ Here is the step-by-step lifecycle of an agentic task:
 
 ---
 
-## 8.
+## 8. What is Vector?
 
 ---
+
+## 9. What is Vector DB?
+
+---
+
+## 10.
