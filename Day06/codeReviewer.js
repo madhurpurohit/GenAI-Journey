@@ -134,7 +134,7 @@ export async function codeReviewer({ directoryPath }) {
     let response;
     try {
       response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
+        model: "gemini-2.5-flash-lite",
         contents: History,
         config: {
           systemInstruction: `# ROLE
@@ -218,7 +218,10 @@ export async function codeReviewer({ directoryPath }) {
       const functionCalls = response.functionCalls;
 
       if (functionCalls && functionCalls.length > 0) {
-        //* Step7.2.1:- Iterate over the function calls.
+        //* Step7.2.1:- Collect all function calls parts for model message
+        const modelParts = [];
+        const userParts = [];
+
         for (const functionCall of functionCalls) {
           const { name, args } = functionCall;
 
@@ -232,46 +235,36 @@ export async function codeReviewer({ directoryPath }) {
 
           const toolResponse = await toolRegistry[name](args);
 
+          // Collect model's function call part
+          modelParts.push({ functionCall });
+
+          // Collect user's function response part
+          userParts.push({
+            functionResponse: {
+              name,
+              response: {
+                result: toolResponse,
+              },
+            },
+          });
+        }
+
+        // Push all function calls in a single model message
+        if (modelParts.length > 0) {
           History.push({
             role: "model",
-            parts: [{ functionCall }],
+            parts: modelParts,
           });
 
+          // Push all function responses in a single user message
           History.push({
             role: "user",
-            parts: [
-              {
-                functionResponse: {
-                  name,
-                  response: {
-                    result: toolResponse,
-                  },
-                },
-              },
-            ],
+            parts: userParts,
           });
         }
       } else {
-        // Get the text response - try multiple ways
-        let textResponse = "No response generated.";
-
-        try {
-          if (
-            response.candidates &&
-            response.candidates[0]?.content?.parts?.[0]?.text
-          ) {
-            textResponse = response.candidates[0].content.parts[0].text;
-          } else if (response.text) {
-            textResponse =
-              typeof response.text === "function"
-                ? response.text()
-                : response.text;
-          }
-        } catch (e) {
-          console.error("Error extracting response:", e.message);
-        }
-
-        console.log("\n" + textResponse);
+        // Get the text response
+        console.log("\n" + response.text);
         break;
       }
     } catch (error) {
