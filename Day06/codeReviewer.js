@@ -134,7 +134,7 @@ export async function codeReviewer({ directoryPath }) {
     let response;
     try {
       response = await ai.models.generateContent({
-        model: "gemini-2.5-flash-lite",
+        model: "gemini-2.5-flash",
         contents: History,
         config: {
           systemInstruction: `# ROLE
@@ -219,24 +219,33 @@ export async function codeReviewer({ directoryPath }) {
 
       if (functionCalls && functionCalls.length > 0) {
         //* Step7.2.1:- Collect all function calls parts for model message
-        const modelParts = [];
+        const modelParts = functionCalls.map((fc) => ({ functionCall: fc }));
+
+        // Push model's function call part
+        History.push({ role: "model", parts: modelParts });
+
         const userParts = [];
 
         for (const functionCall of functionCalls) {
           const { name, args } = functionCall;
 
-          console.log(`📌 ${name}`);
+          console.log(`📌 Action: ${name}`);
 
           // Check if function exists in registry
           if (!toolRegistry[name]) {
             console.error(`❌ Unknown function: ${name}`);
+            userParts.push({
+              functionResponse: { name, response: { error: "Tool not found" } },
+            });
             continue;
           }
 
-          const toolResponse = await toolRegistry[name](args);
-
-          // Collect model's function call part
-          modelParts.push({ functionCall });
+          let toolResponse;
+          try {
+            toolResponse = await toolRegistry[name](args);
+          } catch (error) {
+            result = { error: error.message };
+          }
 
           // Collect user's function response part
           userParts.push({
@@ -249,19 +258,11 @@ export async function codeReviewer({ directoryPath }) {
           });
         }
 
-        // Push all function calls in a single model message
-        if (modelParts.length > 0) {
-          History.push({
-            role: "model",
-            parts: modelParts,
-          });
-
-          // Push all function responses in a single user message
-          History.push({
-            role: "user",
-            parts: userParts,
-          });
-        }
+        // Push all function responses in a single user message
+        History.push({
+          role: "user",
+          parts: userParts,
+        });
       } else {
         // Get the text response
         console.log("\n" + response.text);

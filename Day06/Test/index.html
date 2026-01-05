@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo App</title>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -9,14 +11,15 @@
       <h1>My Todo List</h1>
 
       <div class="input-section">
+        <label for="todoInput" class="visually-hidden">Add new task</label>
         <input type="text" id="todoInput" placeholder="Add new task..." />
-        <button onclick="addTodo()">Add</button>
+        <button id="addTodoButton">Add</button> <!-- Event listener to be attached in app.js -->
       </div>
 
       <ul id="todoList"></ul>
 
       <div class="stats">
-        <p>Total: <span id="total">0</span></p>
+        <p>Total: <span id="total" aria-live="polite">0</span></p>
       </div>
     </div>
 
