@@ -1,3 +1,5 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import readlineSync from "readline-sync";
 import { Pinecone } from "@pinecone-database/pinecone"; // For configuring the pinecone client
 import {

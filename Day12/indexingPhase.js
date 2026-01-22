@@ -7,22 +7,22 @@ import { Pinecone } from "@pinecone-database/pinecone"; // For configuring the p
 import { PineconeStore } from "@langchain/pinecone"; // For uploading the chunks to pinecone
 
 //* Step1:- Load the document
-const PDF_PATH = "./dsa.pdf";
+const PDF_PATH = "./Node-js-Notes.pdf";
 const pdfLoader = new PDFLoader(PDF_PATH);
 const rawDocs = await pdfLoader.load();
 
-console.log(rawDocs); // This will give us the metadata and the page content
-console.log(rawDocs.length); // This will give us the number of pages
+// console.log("\nRaw Data:\n", rawDocs); // This will give us the metadata and the page content
+console.log("Raw data means pdf page length: ", rawDocs.length); // This will give us the number of pages
 
 //* Step2:- Split the document into chunks or Create the chunk of the PDF.
 const textSplitter = new RecursiveCharacterTextSplitter({
-  chunkSize: CHUNK_SIZE,
-  chunkOverlap: CHUNK_OVERLAP,
+  chunkSize: 1000,
+  chunkOverlap: 200,
 });
 const chunkedDocs = await textSplitter.splitDocuments(rawDocs);
 
-console.log(chunkedDocs); // This will give us the chunked content
-console.log(chunkedDocs.length); // This will give us the number of chunks
+// console.log("\nChunking Data:\n", chunkedDocs); // This will give us the chunked content
+console.log("Chunked data length: ", chunkedDocs.length); // This will give us the number of chunks
 
 //* Step3:- Configure the Gemini Embeddings
 const embeddings = new GoogleGenerativeAIEmbeddings({
