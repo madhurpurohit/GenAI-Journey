@@ -10,18 +10,6 @@
 6. [What is LLM Hallucination?](#6-what-is-llm-hallucination)
 7. [What is AI Agent?](#7-what-is-ai-agent)
 8. [What is Vector?](#8-what-is-vector--how-recommendation-system-works)
-9. [](#9)
-10. [](#10)
-11. [](#11)
-12. [](#12)
-13. [](#13)
-14. [](#14)
-15. [](#15)
-16. [](#16)
-17. [](#17)
-18. [](#18)
-19. [](#19)
-20. [](#20)
 
 ---
 
@@ -527,9 +515,3 @@ This solves the biggest problem in AI: **Understanding Intent.**
 | **Cons**           | Uses too much memory (Sparsity).     | Slow to traverse deep links.          | Hard to debug (Black Box).                        |
 
 ---
-
-## 9.
-
----
-
-## 10.
