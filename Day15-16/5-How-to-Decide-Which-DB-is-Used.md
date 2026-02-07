@@ -1,5 +1,15 @@
 # How to Decide Between SQL, NoSQL, Vector, Graph, and Redis: A Strategic Guide
 
+## 📑 Table of Contents
+
+1. [SQL (Structured Query Language and Structured Databases)](#1-sql-structured-query-language-and-structured-databases)
+2. [NoSQL (Not Only SQL and Unstructured Databases)](#2-nosql-not-only-sql-and-unstructured-databases)
+3. [VectorDB (Similarity Search)](#3-vectordb-similarity-search)
+4. [GraphRAG (A Relationship Database)](#4-graphrag-a-relationship-database)
+5. [Redis (Fastest In-Memory Database)](#5-redis-fastest-in-memory-database)
+
+---
+
 ## 1. SQL (Structured Query Language and Structured Databases)
 
 > **"If we could store data in simple files (.txt, .csv), why did we need a 'Relational' structure like SQL? And today, what specific data patterns should lead us to choose SQL without hesitation?"**
@@ -57,6 +67,15 @@ SQL reaches its limit when:
 2. **Unstructured Data:** If the data has no fixed format (e.g., social media posts or raw sensor data).
 
 > **SQL is synonymous with discipline. When you want your data to remain "well-behaved" and error-free, choose SQL.**
+
+> [!TIP] **Time Complexity (SQL)**
+> | Operation | Average Case | Worst Case |
+> |-----------|--------------|------------|
+> | **Create (INSERT)** | O(log n) | O(n) - with index rebuilding |
+> | **Read (SELECT)** | O(log n) - indexed | O(n) - full table scan |
+> | **Update** | O(log n) - indexed | O(n) - without index |
+> | **Delete** | O(log n) - indexed | O(n) - cascade deletes |
+> | **Search (WHERE)** | O(log n) - B-Tree index | O(n) - unindexed |
 
 ---
 
@@ -122,6 +141,18 @@ NoSQL fails when:
 | **Scaling**     | Vertical (Scale Up)     | Horizontal (Scale Out)      |
 | **Integrity**   | High (ACID)             | Base (Eventual Consistency) |
 | **Development** | Slower (Schema changes) | Fast (Schemaless)           |
+
+> **NoSQL is synonymous with flexibility. When you want your data to \"scale infinitely\" and evolve freely, choose NoSQL.**
+
+> [!TIP] **Time Complexity (NoSQL - Document DB like MongoDB)**
+> | Operation | Average Case | Worst Case |
+> |-----------|--------------|------------|
+> | **Create (INSERT)** | O(1) | O(n) - with index updates |
+> | **Read (by \_id)** | O(1) | O(1) |
+> | **Read (by field)** | O(log n) - indexed | O(n) - unindexed |
+> | **Update** | O(log n) - indexed | O(n) - unindexed |
+> | **Delete** | O(log n) - indexed | O(n) - unindexed |
+> | **Search (Query)** | O(log n) - indexed | O(n) - collection scan |
 
 ---
 
@@ -195,6 +226,15 @@ Vector DB fails when:
 
 > **This database runs on "Mathematics," not "Spelling."**
 
+> [!TIP] **Time Complexity (VectorDB)**
+> | Operation | Average Case | Worst Case |
+> |-----------|--------------|------------|
+> | **Create (INSERT)** | O(log n) | O(n) - index rebuild |
+> | **Read (by ID)** | O(1) | O(1) |
+> | **Update** | O(log n) | O(n) - re-indexing |
+> | **Delete** | O(log n) | O(n) |
+> | **Similarity Search (ANN)** | O(log n) - HNSW | O(n) - brute force |
+
 ---
 
 ## 4. GraphRAG (A Relationship Database)
@@ -263,6 +303,15 @@ Graph DB fails when:
 
 > **This database doesn't just look at "What the data is"; it looks at "How the data is connected."**
 
+> [!TIP] **Time Complexity (GraphDB)**
+> | Operation | Average Case | Worst Case |
+> |-----------|--------------|------------|
+> | **Create (Node/Edge)** | O(1) | O(1) |
+> | **Read (Node by ID)** | O(1) | O(1) |
+> | **Update** | O(1) | O(1) |
+> | **Delete** | O(k) - k = edges | O(n) - cascading |
+> | **Traversal/Search** | O(k) - k = neighbors | O(V + E) - BFS/DFS |
+
 ---
 
 ## 5. Redis (Fastest In-Memory Database)
@@ -330,6 +379,15 @@ Redis fails when:
 | **Data Types**     | Tables / Documents   | Strings, Lists, Sets, Hashes   |
 
 > **This database is used when you need "Velocity" and are willing to accept the risk of RAM volatility.**
+
+> [!TIP] **Time Complexity (Redis)**
+> | Operation | Average Case | Worst Case |
+> |-----------|--------------|------------|
+> | **Create (SET)** | O(1) | O(1) |
+> | **Read (GET)** | O(1) | O(1) |
+> | **Update (SET)** | O(1) | O(1) |
+> | **Delete (DEL)** | O(1) | O(n) - multiple keys |
+> | **Search (SCAN)** | O(n) | O(n) - no native indexing |
 
 There are more DB is left: **Time Series Database (InfluxDB)** or **Search Engine (Elasticsearch)**
 
