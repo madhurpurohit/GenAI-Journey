@@ -1,5 +1,7 @@
 # 🔍 AI Code Reviewer - Complete Project Guide
 
+[Notion Docs Link](https://www.notion.so/Lecture-07-Build-Code-Reviewer-2d3a9af81c988071b829e3163129b078?source=copy_link)
+
 > A step-by-step guide to building an AI-powered code reviewer using Google's Gemini API with function calling capabilities.
 
 ---

@@ -1,3 +1,5 @@
+[Notion Docs Link](https://www.notion.so/2f1a9af81c98803fb2a9ce500e13ce71?source=copy_link)
+
 # Connecting the Dots: How GraphRAG Solves the Greatest Flaw of Vector Search
 
 While standard RAG (Vector Search) is a master of finding "similar" chunks, it has a significant blind spot: it struggles to understand the **Big Picture**. Let’s break down the evolution of GraphRAG and see how it bridges the gap between searching for text and searching for meaning.

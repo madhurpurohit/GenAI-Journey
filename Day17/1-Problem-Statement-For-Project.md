@@ -1,5 +1,7 @@
 ## **Problem Statement: Hybrid Movie Intelligence & Discovery Engine**
 
+[Notion Docs Link](https://www.notion.so/Lecture-17-Project-2fea9af81c98800caa23eccb3fb108d0?source=copy_link)
+
 ### **Context**
 
 You are required to design the backend architecture for a next-generation **Movie Discovery System**. The dataset is provided in a **PDF format containing 1000 movies**, where each movie follows a specific detail-oriented structure (including Director, Cast, Awards, Themes, etc.). The goal of the system is not just to "search" but to understand complex user queries and provide highly accurate results.

@@ -1,5 +1,7 @@
 # The Evolution of RAG: From First Principles
 
+[Notion Docs Link](https://www.notion.so/RAG-System-2e8a9af81c9881eab86dfe8bf32fcfb4?source=copy_link)
+
 This is the first part of a step-by-step evolution of how we taught AI to "look things up" before speaking.
 
 ---
