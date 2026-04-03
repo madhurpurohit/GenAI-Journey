@@ -123,3 +123,107 @@ Aisa humne isliye kiya kyoki humne socha ki aisa to possible hi nahi hoga, ki in
 
 ---
 
+## Why we don't divide by 2?
+
+Kyoki hamare real world data me noise present hoti hai, **Noise** means real world me kaafi huge amount data hota hai, so isme kaafi saare aisa data bhi present hota hai jo ki sahi nahi ho ho sakta hai usme kaafi saari values galat ho, ya usme kaafi saare outliers present ho, ya usme kaafi saare missing values present ho etc.
+
+![Explanation](Why-we-not-divide.svg)
+
+Isme hamare pass ek problem hai, ki agar hum aise divide karenge to ye instant jump karega or suppose ki agar bich me koi data wrong/noisy ho to uske according hamara whole function hi galat ho jayega, isliye hum isko divide ya instant jump nahi karte hai.
+
+To iske solution ke form me hum isme bahut chhote chhote steps leta hu, so agar beech me koi wrong data present hai, to hum bahut hi kam movement karenge, or agar data sahi hai to hum uske according aage badhte jayenge.
+
+Ab hum ye chhote chhote steps kaise decide karenge, to hum yaha per error find karte hai, jaise expected output or actual output ke bich ka difference find karte hai. Isko hi hum **Loss Function** kahte hai.
+
+```
+Loss Function/Error = Actual Output - Expected Output
+```
+
+---
+
+## How we decide movement size/steps?
+
+```
+W1New = W1Old + (0.01 * Error)
+
+W2New = W2Old + (0.01 * Error)
+
+BNew = BOld + (0.01 * Error)
+```
+
+So we get the new value of W1 is 14.75, W2 is 1.75 or B is 0.75. So our new formula is:-
+
+```formula
+Z = 14.75*X + 1.75*Y + 0.75
+```
+
+Ab hum next value lenge X, Y ki, so we get:-
+
+```
+Z = 14.75 * 4 + 1.75 * 5 + 0.75
+Z = 59 + 8.75 + 0.75
+Z = 68.5
+```
+
+& our **Loss Function** is:-
+
+```
+Loss Function/Error = 39 - 68.5
+Loss Function/Error = -29.5, So we take a roundOf -30.
+```
+
+So our new values of W1, W2 & B is:-
+
+```
+W1New = 14.75 + (0.01 * -30) => 14.45
+
+W2New = 1.75 + (0.01 * -30) => 1.45
+
+BNew = 0.75 + (0.01 * -30) => 0.45
+```
+
+Lekin agar hum dekhe to is tarah se to hum kabhi bhi actual output wale formule tak nahi pahuch payenge, kyoki hum hamesha 0.01 Error hi add/substract kar rahe hai, isliye hum isme ek **Learning Rate** bhi use karte hai, jo ki hume batata hai ki hume kitna step aage badhna hai.
+
+Suppose ki agar X=0 & Y=5 to hume dikh raha hai ki W1 ka error/Loss Function me koi contributiion hai hi nahi, hum phir bhi isko punish kar rahe hai. Lekin previous method ke hisaab se hum W1New, W2New & BNew ko 0.01 Error se update kar rahe hai. Lekin actually Error aaya tha W2 & B ki wajah se to hume W1 ko update kyo karna hai, kyoki usne to error me koi contributiion hi nahi kiya hai. To iska solution kya hai?
+
+So iske solution ke form me hum isme input se multiply karte hai Error me. Taaki jisne jitna contributiion kiya ho usko utna hi punishment mile. So new formula is:-
+
+```
+W1New = W1Old + (0.01 * Error * X)
+
+W2New = W2Old + (0.01 * Error * Y)
+
+BNew = BOld + (0.01 * Error * 1)
+```
+
+So ab agar X=3, Y=2, B=1 ho to Error = -25 hoga, so ab new W1, W2 & B ki value:-
+
+```
+W1New = 15 + (0.01 * -25 * 3) => 14.25
+
+W2New = 2 + (0.01 * -25 * 2) => 1.5
+
+BNew = 1 + (0.01 * -25 * 1) => 0.75
+```
+
+So ab ye teeno W1, W2 & B apni apni speed se move kar rahe hai. To ab hum isko next iteration me use karenge, or is tarah se hum hamesha apne actual output ke nearest pahuchte jayenge.
+
+So agar humare pass 1000 data points hai, to ye zaroori nahi hai ki 100% accurate formula generate kar paaye, balki hum isme ye koshish karte hai ki hum jitna ho sake utna accurate formula ke pass pahuch jaaye. Kyoki real world me data me noise present hoti hai, isliye hum kabhi bhi 100% accurate formula nahi bana sakte.
+
+So maybe 100 data points per train hone ke baad ye formula banega:-
+
+```
+Z = 4.98*X + 3.01*Y + 4.2
+```
+
+Is formula ko hi hum Single Neuron bolte hai. So basically hum **Deep Learning** me W1, W2 & B ki value ko hi find karte hai. Isme hum bahut se weights bhi le sakte hai jaise W1, W2, W3....etc.
+
+![Single Neuron Working](Single-Neuron-Working.svg)
+
+## What is Epoch?
+
+Epoch means ki humne apne model ko kitni baar train kiya hai, jaise agar humne apne model ko 100 baar train kiya to uske 100 epochs honge. Jaise hum as a human ek book ko ek certain number of time tak hi read karte hai jab tak hume kuch new things learn karne ko milti hai, waise hi hum apne model ko epochs tak train karte hai.
+
+> So abhi tak hum sirf ek single line ki equation ko hi find karte hai, kyoki at the end hamara formula abhi ek straight line equation hi hai like y=mx+c. So humne abhi complex function ko find nahi kiya hai, jaise **Quadratic Function** or **Cubic Function** etc.
+
+---
