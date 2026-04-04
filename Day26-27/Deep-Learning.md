@@ -1,58 +1,104 @@
-# Deep Learning by First Thought Principle
+# Deep Learning From First Principles
 
-Hum as a human normal code like Prime Number, Fibonacci Series, Sliding Window, Tree traversal etc ka working code likha sakte hai, but ye hum tabhi likh sakte hai jab hume uske pichhe ka logic pata ho, & agar hume logic pata hai to hum usko kisi bhi language me likh sakte hai, & ab chunki humne khud ne code likha hai to hume iska multiple inputs per kya output aayega ye bhi confirm hota hai, jisse hum apne logic ko cross check kar sakte hai, & agar kahi koi galti hoti hai to hum usko easily fix kar sakte hai. Ab yaha jo output hai wo hume pahale se hi pata hota hai, isko hi hum **Deterministic Output** kahate hai.
+## Table of Contents
 
-- **Deterministic Output:** Iska simple matlab hota hai ki hume pahale se hi pata hota hai ki input per kya output aayega. Iska main concept hai ki hum jitni baar bhi same input denge wo her baar hume same output dega jaise agar humne 2+2 ka code likha to wo her baar 4 hi dega, chahe hum usko 100 baar bhi run kare.
-
-## Why we need Deep Learning?
-
-Abhi tak humne as a human wo problems to solve kar li thi jinka output deterministic hota hai, but real world me hume bahut si aisi problem face hui jinka output non-deterministic hota hai, & jinke according koi logic likhna impossible hota hai, jaise:-
-
-**Problem1:** Hume ek image as a input leni hai, jisme koi bhi ek character likha hua hai, & hume us character ko as a output dena hai. Or isko hume sirf kisi specific language se hi build karna hai bina kisi third party library ke. Ye problem real life me exist karti hai, jaise CCTV camera se hamara challan kaise issue ho jata hai, toll per camera se Fastag ko wo kaise recognize kar leta hai. To in sabhi situation me CCTV ke liye vehicle ki number plate ek image hi to hai, & wo isme se data means number hi to extract karenge.
-
-**Problem2:** Ya agar hume ek aisa system banana hai jisme hum image as an input lenge or output me hum us image me jo animal show ho raha hai uska naam de denge, to ye bhi to ek non-deterministic problem hi hai, kyuki isme hume pahale se nahi pata hota hai ki input me kya aayega, & iska output bhi non-deterministic hota hai.
-
-> So in short deterministic input per hamesha deterministic output aayega, & non-deterministic input per non-deterministic output aayega.
-
----
-
-## Solution of both problems
-
-Ab hum ye sochenge ki hum as a human images ko ya things ko kaise recognize karte hai, menas agar hume kisi baby ko ye batana ho ki ye Dog hai ya ye Cat hai, to hum usko kaise batayenge?
-
-Hum iske liye repeatation method ka use karte hai, matlab hum us baby ko baar baar Dog or Cat ko show karte hai, jisse uske mind me ek neural network build ho jata hai, & wo uske baad easily identify kar pata hai ki ye Dog hai ya Cat hai.
-
-Ab agar hum soche to humne us baby ko koi hard & fast rule nahi bataya ki agar koi cheez gol hai or red hai to wo apple hogi & agar koi cheez gol hai to wo ball hogi, kyoki agar aisa hota to agar hum uske saamne Red Ball rakhte to wo usko Apple bol deta, jo ki galat hota.
-
-To phir baby learn kaise karta hai, wo observation se learn karta hai, jo bhi cheez wo baar baar dekh raha hai, wo usko reality maanne lagta hai, jaise hum usko Dog ki image baar baar dikhakar usko ye batate hai ki ye Dog hai, to uske baad wo Dog or Wolf me easily difference kar pata hai, kyoki usne Dog ko baar baar dekha hota hai.
-
-> But agar hum logically soche to hume nahi pata hota hai ki baby ke mind me kya chal raha hota hai, wo kaise learn karta hai, iska koi bhi logic nahi hai. Aise hi emotions ke regarding bhi koi logic nahi hota ki human ko anger kab feel hota hai, kab usko happy feel hota hai etc, bus hume ye pata hai ki koi harmon release hota hai isliye aisa hota hai. But uske pichhe ka logic nahi pata ki aakhir wo harmon bhi kab release hota hai. Jaise agar hume koi mazak me kuch galat bhi bol de to hum us time to laugh karte hai, but agar koi hume seriously kuch galat bol de to hum anger ho jate hai. Ab iska kya logic hai & anger me bhi kitna angry hue hai menas sirf kuch chilla chot kar rahe hai ya fight karne lag gaye hai.
-
-Aise hi hume as a human ye bhi nahi pata ki hamari original language kya hai, means ek baby or dog dono ke saamne hum kuch bhi words bolte hai, to wo usko kaise identify karke adapt kar leta hai, & baby or dog dono hi hamari baat ko samjhate to hai, but baby bolna seekh jata hai per dog nahi bol pata. Or aise hi agar hum baby ko uski mothertoung to seekhate nahi hai, jaise hindi, english, urdu, russian, french etc hum uske samne sirf kuch words ya sentence hi baar baar repeat karte hai, & wo fir khud hi different type of sentences even words bhi bolne lag jata hai, jo kabhi humne usko seekhaye bhi nahi. Ye kaise possible hota hai, iska koi bhi logic nahi hai.
-
-> Aise hi hume as a human ye bhi nahi pata ki hum sochate kaise hai, hum kisi bhi cheez ko learn kaise karte hai. Aise hi hum conciousness ko bhi define nahi kar sakte.
-
-Agar humne in sabhi cheezon ko define kar diya, to wo logic ka use karke hi hum usko code me replicate nahi kar sakte kya, to hum abhi tak AGI ko build kar chuke hote.
+- [Why Can Humans Write Code?](#why-can-humans-write-code)
+  - [What Is Deterministic Output?](#what-is-deterministic-output)
+- [Why Do We Need Deep Learning?](#why-do-we-need-deep-learning)
+  - [Problem 1: Character Recognition From Images](#problem-1-character-recognition-from-images)
+  - [Problem 2: Animal Recognition From Images](#problem-2-animal-recognition-from-images)
+- [How Do Humans Learn To Recognize Things?](#how-do-humans-learn-to-recognize-things)
+  - [Why Can't We Define Human Learning Logically?](#why-cant-we-define-human-learning-logically)
+  - [What About Language Acquisition?](#what-about-language-acquisition)
+  - [Why Haven't We Built AGI Yet?](#why-havent-we-built-agi-yet)
+- [How Do We Solve Non-Deterministic Problems?](#how-do-we-solve-non-deterministic-problems)
+- [Some Worked Examples](#some-worked-examples)
+  - [Problem 1: Single Input Prediction](#problem-1-single-input-prediction)
+  - [Problem 2: Multi-Input Prediction](#problem-2-multi-input-prediction)
+- [How Is The Formula Actually Generated?](#how-is-the-formula-actually-generated)
+- [Why Don't We Directly Divide To Correct The Error?](#why-dont-we-directly-divide-to-correct-the-error)
+  - [What Is A Loss Function?](#what-is-a-loss-function)
+- [How Do We Decide The Movement Size (Step Size)?](#how-do-we-decide-the-movement-size-step-size)
+  - [Step-By-Step Weight Update (Iteration 1)](#step-by-step-weight-update-iteration-1)
+  - [Step-By-Step Weight Update (Iteration 2)](#step-by-step-weight-update-iteration-2)
+  - [The Problem With Uniform Updates](#the-problem-with-uniform-updates)
+  - [The Solution: Input-Weighted Updates](#the-solution-input-weighted-updates)
+  - [The Final Trained Formula (Single Neuron)](#the-final-trained-formula-single-neuron)
+- [What Is An Epoch?](#what-is-an-epoch)
 
 ---
 
-## How we solve non-deterministic problems
+## Why Can Humans Write Code?
 
-So iske liye hum ek method use karte hai, hum bahut saare input or uske corresponding output dete hai, or hum ek function build karwate hai jiska use hum similar type ke data ke output find karne ke liye karte hai.
+As humans, we can write working code for normal problems like checking for prime numbers, generating Fibonacci series, implementing sliding window algorithms, tree traversals, and so on. However, we can only write this code when we know the underlying logic behind it. And if we know the logic, we can implement it in any programming language. Furthermore, since we wrote the code ourselves, we can confirm what output a given input will produce, which allows us to cross-check our logic. If there's a mistake somewhere, we can easily fix it. The key point here is that the output is known to us in advance — this is what we call **Deterministic Output**.
+
+### What Is Deterministic Output?
+
+**Deterministic Output** simply means that we know in advance what output a given input will produce. The core concept is that no matter how many times we provide the same input, the system will always return the same output. For example, if we write code for `2 + 2`, it will always return `4`, even if we run it 100 times.
+
+---
+
+## Why Do We Need Deep Learning?
+
+So far, as humans, we could solve problems whose outputs are deterministic. But in the real world, we encounter many problems whose outputs are **non-deterministic** — problems for which writing a fixed logic is simply impossible. Here are some examples:
+
+### Problem 1: Character Recognition From Images
+
+Suppose we need to take an image as input in which a single character is written, and we need to return that character as output. And we have to build this using only a specific programming language — no third-party libraries. This problem exists in real life: think about how CCTV cameras issue traffic challans, or how cameras at toll booths recognize FasTags. In all these situations, the vehicle's number plate is just an image for the CCTV, and the system needs to extract the data (i.e., the number) from that image.
+
+### Problem 2: Animal Recognition From Images
+
+Or suppose we need to build a system that takes an image as input and returns the name of the animal shown in that image. This is also a non-deterministic problem because we don't know in advance what input will arrive, and the output is also non-deterministic.
+
+> **In short:** Deterministic input always produces deterministic output, and non-deterministic input produces non-deterministic output.
+
+---
+
+## How Do Humans Learn To Recognize Things?
+
+Let's think about how we, as humans, recognize images and objects. For instance, if we need to teach a baby the difference between a Dog and a Cat, how would we do it?
+
+We use the **repetition method**. We repeatedly show the baby images of Dogs and Cats, and through this process, a neural network gets built inside the baby's mind, which then enables the baby to easily identify whether something is a Dog or a Cat.
+
+Now if we think about it, we never gave the baby any hard-and-fast rules like "if something is round and red, it's an apple" or "if something is round, it's a ball." Because if we had, then when we placed a Red Ball in front of the baby, it would have called it an Apple, which would be incorrect.
+
+So how does a baby actually learn? It learns through **observation**. Whatever the baby sees repeatedly, it starts accepting as reality. For example, by repeatedly showing the baby images of a Dog and telling it "this is a Dog," the baby eventually becomes able to easily distinguish between a Dog and a Wolf, because it has seen the Dog repeatedly.
+
+### Why Can't We Define Human Learning Logically?
+
+But if we think logically, we don't actually know what's going on inside the baby's mind — how it learns. There is no defined logic for this process. Similarly, even for emotions, there is no logic for when a human feels anger, when they feel happiness, etc. We only know that certain hormones get released and that's why these emotions occur. But the underlying logic — when exactly those hormones are released — is unknown. For instance, if someone jokingly says something offensive, we laugh at that moment. But if someone says the same thing seriously, we get angry. What is the logic behind this? And even within anger, how angry do we get — are we just yelling, or are we getting into a physical fight?
+
+### What About Language Acquisition?
+
+Similarly, as humans, we don't even know what our "original language" is. If we speak random words in front of both a baby and a dog, how does the baby identify and adapt to those words? Both a baby and a dog understand what we're saying, but the baby eventually learns to speak while the dog cannot. And we don't actually teach the baby its mother tongue directly — whether it's Hindi, English, Urdu, Russian, French, etc. We simply repeat certain words or sentences in front of the baby, and the baby then starts speaking different types of sentences and even entirely new words that we never taught it. How is this possible? There is no defined logic for this.
+
+> Similarly, as humans, we don't even understand how we think, how we learn things. We also cannot define consciousness.
+
+### Why Haven't We Built AGI Yet?
+
+If we were able to define all of these things (learning, thinking, consciousness), couldn't we use that logic to replicate it in code? If we could, we would have already built **AGI (Artificial General Intelligence)** by now.
+
+---
+
+## How Do We Solve Non-Deterministic Problems?
+
+For this, we use a specific method: we provide a large number of inputs along with their corresponding outputs, and we get a **function** built that we can then use to find the output for similar types of data.
 
 $$
 \text{input} \xrightarrow{\text{function}(x)} \text{output}
 $$
 
-Hum deterministic problems ko solve karne ke liye hum khud function likhate hai, but non-deterministic problems ko solve karne ke liye hum function khud nahi likhate, balki hum usko machine se build karwate hai. Jiske liye hum usko bahut saare input or uske corresponding output dete hai.
+For deterministic problems, we write the function ourselves. But for non-deterministic problems, we don't write the function ourselves — instead, we get the **machine** to build it. To do this, we provide the machine with a large number of inputs and their corresponding outputs.
 
-> In short hum Deep Learning me us Function(X) ko hi find karte hai.
+> **In short:** In Deep Learning, we are essentially finding that **Function(X)**.
 
 ---
 
-## Some Other Problems
+## Some Worked Examples
 
-**Problem1:** Agar hume Study hours diye ho or uske corresponding marks diye ho, to hum uske basis per prediction kar sakte hai agar hume study hours diye gaye ho to?
+### Problem 1: Single Input Prediction
+
+If we are given Study Hours and their corresponding Marks, can we predict the marks for a given number of study hours?
 
 | Study (X) | Marks (Y) |
 | --------- | --------- |
@@ -63,15 +109,17 @@ Hum deterministic problems ko solve karne ke liye hum khud function likhate hai,
 | 6         | 62        |
 | 7         | ?         |
 
-Ab agar hum yaha notice kare to hume ek formula dikh raha hai.
+If we observe the data carefully, a formula becomes visible:
 
 ```formula
 Y = 2*X + 2
 ```
 
-So iska output 16 aayega.
+So the output for X=7 would be **16** (Note: applying the visible pattern from the data).
 
-**Problem2:** Agar hume Study Hours, Sleep Hours or Mraks diye hue ho to kya agar hume Study Hour, Sleep ki value milane per Marks ko predict kar sakte hai?
+### Problem 2: Multi-Input Prediction
+
+If we are given Study Hours and Sleep Hours along with corresponding Marks, can we predict the Marks when both Study Hours and Sleep Hours are provided?
 
 | Study(X) | Sleep(Y) | Marks(Z) |
 | -------- | -------- | -------- |
@@ -82,58 +130,60 @@ So iska output 16 aayega.
 | 6        | 6        | 52       |
 | 7        | 3        | ?        |
 
-Ab isme bhi hum pattern to find kar sakte hai but hume time lagega.
+We can find a pattern here too, though it takes more effort:
 
 ```formula
 Z = 5*X + 3*Y + 4
 ```
 
-So iska output 48 aayega.
+So the output for X=7, Y=3 would be **48**.
 
-> Bus hum Deep Learning me ye Formula means Function ko hi generate karwate hai, or wo automatically isko generate karta hai, isliye hi hum iske pahale bahut saare input or uske corresponding output dete hai.
+> **This is exactly what Deep Learning does** — it generates this formula (i.e., the function) automatically. That's precisely why we feed it a large number of inputs and their corresponding outputs beforehand.
 
 ---
 
-## How actually the formula is generated?
+## How Is The Formula Actually Generated?
 
-So hum isko problem2 ke liye samjhate hai, ab hume inke bich ka koi pattern ya relationship nahi pata. But hume ye pata hai ki hume 2 known values di hai X & Y so iske according hum eik genralized formula create karenge.
+Let's understand this using Problem 2. We don't know the pattern or relationship between the inputs and output. But we do know that we have 2 known input variables X and Y. Based on this, we create a generalized formula:
 
 ```formula
 Z = W1*X + W2*Y + B
 ```
 
-Ab isme W1, W2 & B unknown hai, or hume inko hi find karna hai, kyoki X or Y ki value to hume input me di hai, or uske correspoding output bhi diya hai, to hum isme ek initially W1, W2 & B ki random value le lenge. Or hum isme hit & try se actual value find karte hai W1, W2 & B ki.
+Here, **W1**, **W2**, and **B** are unknown — these are what we need to find. Since the values of X and Y are given along with their corresponding outputs, we start by assigning random initial values to W1, W2, and B. We then use a **hit-and-trial** approach to find the actual values of W1, W2, and B.
 
-Ab suppose humne W1 = 15, W2 = 2 & B = 1 le liya so hamare formule me hum ab X = 3, Y = 2 put karenge.
+Suppose we initially set **W1 = 15**, **W2 = 2**, and **B = 1**. Plugging in X = 3, Y = 2:
 
 ```solution
 Z = 15*3 + 2*2 + 1
 Z = 50
 ```
 
-But hume pata hai ki hamara actual output 25 hai, so hume jo output receive hua hai wo actual output ka 2times hai, to humare mind me thought aayega ki agar hum saare hi W1, W2 & B ko 2 se divide kar de to hume desired output mil jayega.
+But we know the actual output is **25**. So the output we received is 2 times the actual output. A natural thought would be: "If we divide all of W1, W2, and B by 2, we'll get the desired output."
 
-But hum aisa nahi karna chahiye, kyoki hume nahi pata ki aage kya hoga, kyoki hume to abhi sirf 1 input or uske corresponding output ke basis per hi ye idea aaya hai, but real world me data aisa to nahi hota hai na ki hamesha pattern exist kare hi, so hume actual pattern ke nearest pahuchana hai, & most of the time **Deep Learning** me hume accurate pattern nahi milta hai.
+But we **should not** do this. The reason is that this idea came from looking at just 1 input-output pair. In the real world, data doesn't always follow a clean pattern. We need to reach the **nearest approximation** of the actual pattern. And most of the time in Deep Learning, we don't get a perfectly accurate pattern.
 
-Ab humne W1, W2 or B kyo liya?
+### Why Did We Introduce W1, W2, And B?
 
-Aisa humne isliye kiya kyoki humne socha ki aisa to possible hi nahi hoga, ki input X or Y ko hum direct hi output Z me convert kar de, to hamara output hamesha kuch percentage X per, kuch percentage Y per or kuch percentage constant per depend karega, isliye humne W1, W2 & B ko liya. Or agar wo dependent nahi hota to W1, W2 & B ki value 0 ya 1 ho jati.
+We introduced W1, W2, and B because it's simply not possible for the inputs X and Y to directly convert into the output Z. The output will always depend on some percentage of X, some percentage of Y, and some constant value. That's why we use W1, W2, and B. And if any input were truly not contributing to the output, its weight (W1 or W2) would naturally become 0 or 1.
 
-> Deep Learning me hum hamesha ye W1, W2 jaise weights or B jaise constant ki value hi find karte hai.
+> **In Deep Learning, we are always finding the values of weights (like W1, W2) and biases (like B).**
 
 ---
 
-## Why we don't divide by 2?
+## Why Don't We Directly Divide To Correct The Error?
 
-Kyoki hamare real world data me noise present hoti hai, **Noise** means real world me kaafi huge amount data hota hai, so isme kaafi saare aisa data bhi present hota hai jo ki sahi nahi ho ho sakta hai usme kaafi saari values galat ho, ya usme kaafi saare outliers present ho, ya usme kaafi saare missing values present ho etc.
+Because real-world data contains **Noise**. **Noise** means that in the real world, there is a huge amount of data, and within it, there can be plenty of incorrect data points — many values could be wrong, there could be many outliers, or there could be many missing values, etc.
 
 ![Explanation](Why-we-not-divide.svg)
 
-Isme hamare pass ek problem hai, ki agar hum aise divide karenge to ye instant jump karega or suppose ki agar bich me koi data wrong/noisy ho to uske according hamara whole function hi galat ho jayega, isliye hum isko divide ya instant jump nahi karte hai.
+The problem with dividing directly is that it causes an **instant jump**. Suppose there's some noisy/wrong data in between — then according to that wrong data, our entire function would go wrong. That's why we don't divide or make instant jumps.
 
-To iske solution ke form me hum isme bahut chhote chhote steps leta hu, so agar beech me koi wrong data present hai, to hum bahut hi kam movement karenge, or agar data sahi hai to hum uske according aage badhte jayenge.
+As a solution, we take **very small steps**. So if there's any wrong data present in between, we make very minimal movement, and if the data is correct, we continue progressing accordingly.
 
-Ab hum ye chhote chhote steps kaise decide karenge, to hum yaha per error find karte hai, jaise expected output or actual output ke bich ka difference find karte hai. Isko hi hum **Loss Function** kahte hai.
+### What Is A Loss Function?
+
+So how do we decide these small steps? We do this by finding the **error** — the difference between the expected output and the actual output. This is called the **Loss Function**.
 
 ```
 Loss Function/Error = Actual Output - Expected Output
@@ -141,7 +191,9 @@ Loss Function/Error = Actual Output - Expected Output
 
 ---
 
-## How we decide movement size/steps?
+## How Do We Decide The Movement Size (Step Size)?
+
+### Step-By-Step Weight Update (Iteration 1)
 
 ```
 W1New = W1Old + (0.01 * Error)
@@ -151,13 +203,15 @@ W2New = W2Old + (0.01 * Error)
 BNew = BOld + (0.01 * Error)
 ```
 
-So we get the new value of W1 is 14.75, W2 is 1.75 or B is 0.75. So our new formula is:-
+So we get the new values: **W1 = 14.75**, **W2 = 1.75**, and **B = 0.75**. Our new formula becomes:
 
 ```formula
 Z = 14.75*X + 1.75*Y + 0.75
 ```
 
-Ab hum next value lenge X, Y ki, so we get:-
+### Step-By-Step Weight Update (Iteration 2)
+
+Now we take the next pair of X and Y values:
 
 ```
 Z = 14.75 * 4 + 1.75 * 5 + 0.75
@@ -165,14 +219,14 @@ Z = 59 + 8.75 + 0.75
 Z = 68.5
 ```
 
-& our **Loss Function** is:-
+And the **Loss Function** is:
 
 ```
 Loss Function/Error = 39 - 68.5
 Loss Function/Error = -29.5, So we take a roundOf -30.
 ```
 
-So our new values of W1, W2 & B is:-
+So the new values of W1, W2, and B become:
 
 ```
 W1New = 14.75 + (0.01 * -30) => 14.45
@@ -182,11 +236,15 @@ W2New = 1.75 + (0.01 * -30) => 1.45
 BNew = 0.75 + (0.01 * -30) => 0.45
 ```
 
-Lekin agar hum dekhe to is tarah se to hum kabhi bhi actual output wale formule tak nahi pahuch payenge, kyoki hum hamesha 0.01 Error hi add/substract kar rahe hai, isliye hum isme ek **Learning Rate** bhi use karte hai, jo ki hume batata hai ki hume kitna step aage badhna hai.
+### The Problem With Uniform Updates
 
-Suppose ki agar X=0 & Y=5 to hume dikh raha hai ki W1 ka error/Loss Function me koi contributiion hai hi nahi, hum phir bhi isko punish kar rahe hai. Lekin previous method ke hisaab se hum W1New, W2New & BNew ko 0.01 Error se update kar rahe hai. Lekin actually Error aaya tha W2 & B ki wajah se to hume W1 ko update kyo karna hai, kyoki usne to error me koi contributiion hi nahi kiya hai. To iska solution kya hai?
+However, if we look at this approach, we'll never actually reach the correct formula this way, because we are always adding/subtracting only `0.01 * Error`. That's why we also use a **Learning Rate**, which tells us how large each step should be.
 
-So iske solution ke form me hum isme input se multiply karte hai Error me. Taaki jisne jitna contributiion kiya ho usko utna hi punishment mile. So new formula is:-
+Suppose X=0 and Y=5. We can clearly see that W1 has **no contribution** to the error/loss function at all, yet we are still punishing it. With the previous method, we are updating W1New, W2New, and BNew all by `0.01 * Error`. But the error actually came because of W2 and B — so why are we updating W1 at all, since it made no contribution to the error?
+
+### The Solution: Input-Weighted Updates
+
+The solution is to multiply the error by the corresponding input. This way, whoever contributed more to the error gets proportionally more punishment. The new formula becomes:
 
 ```
 W1New = W1Old + (0.01 * Error * X)
@@ -196,7 +254,7 @@ W2New = W2Old + (0.01 * Error * Y)
 BNew = BOld + (0.01 * Error * 1)
 ```
 
-So ab agar X=3, Y=2, B=1 ho to Error = -25 hoga, so ab new W1, W2 & B ki value:-
+So if X=3, Y=2, B=1 and Error = -25, the new values of W1, W2, and B become:
 
 ```
 W1New = 15 + (0.01 * -25 * 3) => 14.25
@@ -206,24 +264,28 @@ W2New = 2 + (0.01 * -25 * 2) => 1.5
 BNew = 1 + (0.01 * -25 * 1) => 0.75
 ```
 
-So ab ye teeno W1, W2 & B apni apni speed se move kar rahe hai. To ab hum isko next iteration me use karenge, or is tarah se hum hamesha apne actual output ke nearest pahuchte jayenge.
+So now all three — W1, W2, and B — are moving at their own respective speeds. We will then use these updated values in the next iteration, and in this way, we keep getting closer and closer to the actual output.
 
-So agar humare pass 1000 data points hai, to ye zaroori nahi hai ki 100% accurate formula generate kar paaye, balki hum isme ye koshish karte hai ki hum jitna ho sake utna accurate formula ke pass pahuch jaaye. Kyoki real world me data me noise present hoti hai, isliye hum kabhi bhi 100% accurate formula nahi bana sakte.
+### The Final Trained Formula (Single Neuron)
 
-So maybe 100 data points per train hone ke baad ye formula banega:-
+So if we have 1000 data points, it's not guaranteed that a 100% accurate formula will be generated. Rather, in Deep Learning, we try to get as close to an accurate formula as possible. Because real-world data contains noise, we can never build a 100% accurate formula.
+
+So maybe after training on 100 data points, the formula becomes:
 
 ```
 Z = 4.98*X + 3.01*Y + 4.2
 ```
 
-Is formula ko hi hum Single Neuron bolte hai. So basically hum **Deep Learning** me W1, W2 & B ki value ko hi find karte hai. Isme hum bahut se weights bhi le sakte hai jaise W1, W2, W3....etc.
+This formula is what we call a **Single Neuron**. So basically, in **Deep Learning**, we are finding the values of W1, W2, and B. We can also have many weights such as W1, W2, W3, and so on.
 
 ![Single Neuron Working](Single-Neuron-Working.svg)
 
-## What is Epoch?
+---
 
-Epoch means ki humne apne model ko kitni baar train kiya hai, jaise agar humne apne model ko 100 baar train kiya to uske 100 epochs honge. Jaise hum as a human ek book ko ek certain number of time tak hi read karte hai jab tak hume kuch new things learn karne ko milti hai, waise hi hum apne model ko epochs tak train karte hai.
+## What Is An Epoch?
 
-> So abhi tak hum sirf ek single line ki equation ko hi find karte hai, kyoki at the end hamara formula abhi ek straight line equation hi hai like y=mx+c. So humne abhi complex function ko find nahi kiya hai, jaise **Quadratic Function** or **Cubic Function** etc.
+An **Epoch** means how many times we have trained our model on the entire dataset. For example, if we trained our model 100 times over the whole dataset, that means 100 epochs. It's similar to how we, as humans, read a book a certain number of times until we stop learning new things from it — likewise, we train our model for a specific number of epochs.
+
+> **So far, we are only finding a single straight-line equation**, because at the end, our formula is still a straight-line equation like `y = mx + c`. We have not yet found complex functions like **Quadratic Functions** or **Cubic Functions**, etc.
 
 ---
